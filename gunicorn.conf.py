@@ -6,3 +6,4 @@ accesslog = 'logs/gunicorn.log'
 errorlog = 'logs/gunicorn.error.log'
 capture_output = True
 timeout = 10
+worker_class = 'gevent'

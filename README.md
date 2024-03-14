@@ -10,14 +10,14 @@ $ curl ifconfig.me
 $ python3 -m venv venv
 $ source venv/bin/activate
 $ pip install --upgrade pip
-# pip install pyupbit flask gunicorn -q
+# pip install pyupbit flask gunicorn gevent -q
 # pip freeze > requirements.txt
 $ pip install -r requirements.txt
 # flask run 
-# gunicorn app:app
 # gunicorn app:app -b 0.0.0.0:8000 -w 2 --timeout 10
 # mkdir logs
-$ gunicorn app:app -b 0.0.0.0:8000 -w 2 --timeout 10 --error-logfile logs/gunicorn.error.log --access-logfile logs/gunicorn.log --capture-output
+# gunicorn app:app -b 0.0.0.0:8000 -w 2 -k gevent --timeout 10 --error-logfile logs/gunicorn.error.log --access-logfile logs/gunicorn.log --capture-output
+$ gunicorn app:app --reload
 ```
 
 ```bash

@@ -51,6 +51,7 @@ def get_account_balance(ak, sk):
 
 @app.route('/account_balance', methods=['POST'])
 def account_balance():
+    pass
     payload : dict = request.get_json()
     ak = payload.get('ak')
     sk = payload.get('sk')
