@@ -43,11 +43,14 @@ def get_account_balance(ak, sk):
     data = upbit.get_balances()
     balances = pd.DataFrame(data).set_index('currency')
     # print(balances)
-    return dict(
-        krw=balances.loc['KRW', ['balance']].to_dict(),
-        btc=balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict(),
-        eth=balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict(),
-    )
+    result = {}
+    if 'KRW' in balances.index:
+        result['krw'] = balances.loc['KRW', ['balance']].to_dict()
+    if 'BTC' in balances.index:
+        result['btc'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
+    if 'ETH' in balances.index:
+        result['eth'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
+    return result
 
 @app.route('/account_balance', methods=['POST'])
 def account_balance():
