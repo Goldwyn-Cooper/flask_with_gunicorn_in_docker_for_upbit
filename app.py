@@ -41,15 +41,16 @@ def get_account_balance(ak, sk):
         return 'Unauthorized : API Key 또는 Secret Key가 필요합니다.', 400
     upbit = Upbit(ak, sk)
     data = upbit.get_balances()
+    # print(data)
     balances = pd.DataFrame(data).set_index('currency')
     # print(balances)
     result = {}
-    if 'krw' in balances.index:
-        result['krw'] = balances.loc['KRW', ['balance']].to_dict()
-    if 'btc' in balances.index:
-        result['btc'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
-    if 'eth' in balances.index:
-        result['eth'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
+    if 'KRW' in balances.index:
+        result['KRW'] = balances.loc['KRW', ['balance']].to_dict()
+    if 'BTC' in balances.index:
+        result['BTC'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
+    if 'ETH' in balances.index:
+        result['ETH'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
     return result
 
 @app.route('/account_balance', methods=['POST'])
