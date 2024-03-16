@@ -19,7 +19,7 @@ def sell_market_order(ak, sk, ticker, volume):
         name = response['error']['name']
         message = response['error']['message']
         return f'{name} : {message}', 400
-    return response or '알 수 없는 에러가 발생했습니다.', 500
+    return response or ('알 수 없는 에러가 발생했습니다.', 500)
 
 def buy_market_order(ak, sk, ticker, amount):
     if not ak or not sk:
@@ -34,7 +34,7 @@ def buy_market_order(ak, sk, ticker, amount):
         name = response['error']['name']
         message = response['error']['message']
         return f'{name} : {message}', 400
-    return response or '알 수 없는 에러가 발생했습니다.', 500
+    return response or ('알 수 없는 에러가 발생했습니다.', 500)
 
 def get_account_balance(ak, sk):
     if not ak or not sk:
