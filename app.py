@@ -44,11 +44,11 @@ def get_account_balance(ak, sk):
     balances = pd.DataFrame(data).set_index('currency')
     # print(balances)
     result = {}
-    if 'KRW' in balances.index:
+    if 'krw' in balances.index:
         result['krw'] = balances.loc['KRW', ['balance']].to_dict()
-    if 'BTC' in balances.index:
+    if 'btc' in balances.index:
         result['btc'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
-    if 'ETH' in balances.index:
+    if 'eth' in balances.index:
         result['eth'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
     return result
 
