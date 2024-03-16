@@ -51,6 +51,8 @@ def get_account_balance(ak, sk):
         result['BTC'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
     if 'ETH' in balances.index:
         result['ETH'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
+    if 'SOL' in balances.index:
+        result['SOL'] = balances.loc['SOL', ['balance', 'avg_buy_price']].to_dict()
     return result
 
 @app.route('/account_balance', methods=['POST'])
