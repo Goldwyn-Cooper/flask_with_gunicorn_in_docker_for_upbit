@@ -45,14 +45,11 @@ def get_account_balance(ak, sk):
     balances = pd.DataFrame(data).set_index('currency')
     # print(balances)
     result = {}
-    if 'KRW' in balances.index:
-        result['KRW'] = balances.loc['KRW', ['balance']].to_dict()
-    if 'BTC' in balances.index:
-        result['BTC'] = balances.loc['BTC', ['balance', 'avg_buy_price']].to_dict()
-    if 'ETH' in balances.index:
-        result['ETH'] = balances.loc['ETH', ['balance', 'avg_buy_price']].to_dict()
-    if 'SOL' in balances.index:
-        result['SOL'] = balances.loc['SOL', ['balance', 'avg_buy_price']].to_dict()
+    for ticker in balances.index:
+        if ticker == 'KRW':
+            result['KRW'] = balances.loc[ticker, ['balance']].to_dict()
+        else:
+            result[ticker] = balances.loc[ticker, ['balance', 'avg_buy_price']].to_dict()
     return result
 
 @app.route('/account_balance', methods=['POST'])
