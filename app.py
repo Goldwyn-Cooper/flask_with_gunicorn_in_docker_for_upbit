@@ -44,6 +44,7 @@ def account_deposit():
     sk = payload.get('sk')
     currency = payload.get('currency')
     dt = payload.get('dt')
+    print(ak, sk, currency, dt)
     return get_deposit_list(ak, sk, currency, dt)
 
 @app.route('/account_withdraw', methods=['POST'])

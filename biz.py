@@ -71,8 +71,9 @@ def get_deposit_list(ak, sk, currency, dt):
     df = df.loc[:, ['done_at', 'amount']]
     df.done_at = pd.to_datetime(df.done_at)
     df.set_index('done_at', inplace=True)
-    df.query(f'index >= "{dt} 00:00:00+09:00"', inplace=True)
-    return df
+    df.query(f'index >= "{dt}"', inplace=True)
+    df.index = df.index.strftime('%Y-%m-%d %H:%M:%S+09:00')
+    return df.to_json()
 
 def get_withdraw_list(ak, sk, currency, dt):
     if not ak or not sk:
@@ -85,7 +86,8 @@ def get_withdraw_list(ak, sk, currency, dt):
     df.done_at = pd.to_datetime(df.done_at)
     df.set_index('done_at', inplace=True)
     df.query(f'index >= "{dt}"', inplace=True)
-    return df
+    df.index = df.index.strftime('%Y-%m-%d %H:%M:%S+09:00')
+    return df.to_json()
 
 if __name__ == '__main__':
     argument = sys.argv[1:]
