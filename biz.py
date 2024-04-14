@@ -84,12 +84,12 @@ def get_withdraw_list(ak, sk, currency, dt):
     df = df.loc[:, ['done_at', 'amount']]
     df.done_at = pd.to_datetime(df.done_at)
     df.set_index('done_at', inplace=True)
-    df.query(f'index >= "{dt} 00:00:00+09:00"', inplace=True)
+    df.query(f'index >= "{dt}"', inplace=True)
     return df
 
 if __name__ == '__main__':
     argument = sys.argv[1:]
     print(argument)
-    # print(get_deposit_list(argument[0], argument[1], 'KRW', '2024-03-25'))
-    print(get_withdraw_list(argument[0], argument[1], 'ETH', '2024-03-25'))
+    print(get_deposit_list(argument[0], argument[1], 'KRW', '2024-03-25 00:00:00+09:00'))
+    print(get_withdraw_list(argument[0], argument[1], 'ETH', '2024-03-25 00:00:00+09:00'))
     

@@ -1,5 +1,5 @@
 from flask import Flask, request
-from biz import get_account_balance, buy_market_order, sell_market_order, deposit_krw
+from biz import get_account_balance, buy_market_order, sell_market_order, deposit_krw, get_deposit_list, get_withdraw_list
 
 app = Flask(__name__)
 
@@ -36,3 +36,21 @@ def deposit():
     sk = payload.get('sk')
     amount = payload.get('amount')
     return deposit_krw(ak, sk, amount)
+
+@app.route('/account_deposit', methods=['POST'])
+def account_deposit():
+    payload : dict = request.get_json()
+    ak = payload.get('ak')
+    sk = payload.get('sk')
+    currency = payload.get('currency')
+    dt = payload.get('dt')
+    return get_deposit_list(ak, sk, currency, dt)
+
+@app.route('/account_withdraw', methods=['POST'])
+def account_withdraw():
+    payload : dict = request.get_json()
+    ak = payload.get('ak')
+    sk = payload.get('sk')
+    currency = payload.get('currency')
+    dt = payload.get('dt')
+    return get_withdraw_list(ak, sk, currency, dt)
